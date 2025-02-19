@@ -21,7 +21,12 @@ public class LivroService {
     }
     public LivroResponse livroToResponse(Livro livro){
         LivroResponse livroResponse = new LivroResponse(livro.getAutor() + " - " + livro.getTitulo());
-
-
+    }
+    public List<LivroResponse> LivrosToResponse(List<Livros> livros){
+        List<LivroResponse> Listalivros = new ArrayList<>();
+        for (Livros livro : livros){
+            listaLivros.add(LivrosToResponse(Livro));
+        }
+        return listaLivros
     }
 }

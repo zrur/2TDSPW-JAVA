@@ -34,11 +34,7 @@ public class LivroController {
     @GetMapping
     public ResponseEntity<List<Livro>> readLivros() {
         List<Livro> livros = livroRepository.findAll();
-        List<LivroResponse> listalivros = new ArrayList<>();
-        for (Livro livro : livros ){
-            listalivros.add(livroService.livroToResponse(livro));
-        }
-        return new ResponseEntity<>(livros,HttpStatus.OK);
+        return new ResponseEntity<>(livroService.livrosToResponse(livros),HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
@@ -51,7 +47,7 @@ public class LivroController {
     }
 
     @PutMapping{"/{id}"}
-    public ResponseEntity<Livro> updateLivro(@RequestBody Livro livro,@PathVariable long id) {
+    public ResponseEntity<Livro> updateLivro(@RequestBody LivroRequest livro,@PathVariable long id) {
       Optional<Livro> Livro livroExistente = livroRepository.findById(id);
       if (livroExistente.isEmpty()){
           return new ResponseEntity<>(null,HttpStatus.BAD_REQUEST);
